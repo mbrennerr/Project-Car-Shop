@@ -1,4 +1,4 @@
-export default interface Model<T>{
+export interface Model<T>{
   create(object: T): Promise<T>;
   read():Promise<T[]>;
   readOne(value: string): Promise<T | null>;
