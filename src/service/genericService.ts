@@ -1,4 +1,4 @@
-import Model from '../interfaces/ModelInterface';
+import { Model } from '../interfaces/ModelInterface';
 
 export default abstract class GenericService<T> {
   constructor(protected model: Model<T>) {}
