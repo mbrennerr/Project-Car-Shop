@@ -16,5 +16,5 @@ export default class CarController extends genericController<Car> {
     } catch (error) {
       next(error);
     }
-  };
+  };  
 }
