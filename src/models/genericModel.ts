@@ -1,5 +1,5 @@
 import { Model as M, Document } from 'mongoose';
-import Model from '../interfaces/ModelInterface';
+import { Model } from '../interfaces/ModelInterface';
 
 export default abstract class GenericModel<T> implements Model<T> {
   constructor(protected model: M<T & Document>) {}
