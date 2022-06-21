@@ -10,12 +10,13 @@ export const ErrorMap:IErrorMap = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default (err:Error, _req:Request, res:Response, _next:NextFunction) => {
+export default (err:Error, _req:Request, res:Response, next:NextFunction) => {
   const { name } = err;
   const status:number = ErrorMap[name];
   console.log('Middleware', err);
   if (!status) {
     return res.status(500).json({ message: err.message });
   }
-  res.status(status).json({ message: err.message });
+  console.log(next);
+  return res.status(status).json({ message: err.message });
 };
