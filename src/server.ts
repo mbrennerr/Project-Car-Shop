@@ -2,7 +2,6 @@ import CarController from './controllers/carController';
 import { Car } from './interfaces/CarInterface';
 import CustomRouter from './routes/CustomRouter';
 import App from './app';
-import ErrorMiddlware from './middlewares/ErrorMiddlware';
 
 const server = new App();
 
@@ -13,6 +12,6 @@ carRouter.addRoute(carController);
 
 server.addRouter(carRouter.router);
 
-server.addmiddleware(ErrorMiddlware);
+server.addmiddleware();
 
 export default server;
