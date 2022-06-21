@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import connectToDatabase from './connection';
 
-class App {
+export default class App {
   public app: express.Application;
 
   constructor() {
@@ -16,15 +16,16 @@ class App {
       () => console.log(`Server running here 👉 http://localhost:${PORT}`),
     );
   }
-  // hello moto;
 
   public addRouter(router: Router) {
     this.app.use(router);
+  }
+
+  public addmiddleware(middleware: any) {
+    this.app.use(middleware);
   }
 
   public getApp() {
     return this.app;
   }
 }
-
-export default App;
