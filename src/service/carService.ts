@@ -6,4 +6,14 @@ export default class CarService extends GenericService<Car> {
   constructor(carModel = new CarModel()) {
     super(carModel);
   }
+
+  create = async (car:Car):Promise<Car> => {
+    const newCar:Car = await this.model.create(car);
+    return newCar;
+  };
+  
+  readOne = async (id:string) => {
+    const car:Car | null = await this.model.readOne(id);
+    return car;
+  };
 }
