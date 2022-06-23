@@ -16,4 +16,9 @@ export default class CarService extends GenericService<Car> {
     const car:Car | null = await this.model.readOne(id);
     return car;
   };
+
+  update = async (id:string, car:Car) => {
+    const updatedCar:Car | null = await this.model.update(id, car);
+    return updatedCar;
+  };
 }
