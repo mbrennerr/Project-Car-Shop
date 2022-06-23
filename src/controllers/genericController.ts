@@ -39,7 +39,7 @@ export default abstract class GenericController<T> {
     
   ): Promise<typeof res | void> => {
     try {
-      const objs = await this.Service.read();
+      const objs:T[] = await this.Service.read();
       return res.json(objs);
     } catch (err) {
       return res.status(500).json({ error: this.errors.internal });
@@ -47,11 +47,11 @@ export default abstract class GenericController<T> {
   };
   // o Método read ja vai ficar implementado por default;
 
-  // abstract readOne(
-  //   req: Request,
-  //   res: Response<T>,
-  //   next: NextFunction
-  // ): Promise<typeof res | void>;
+  abstract readOne(
+    req: Request,
+    res: Response<T>,
+    next: NextFunction
+  ): Promise<typeof res | void>;
   // abstract update(
   //   req: Request,
   //   res: Response<T>,
