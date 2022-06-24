@@ -11,4 +11,16 @@ export default class MotoService extends GenericService<Motorcycle> {
     const newMoto:Motorcycle = await this.model.create(moto);
     return newMoto;
   };
+
+  readOne = async (id:string) => {
+    const moto:Motorcycle | null = await this.model.readOne(id);
+    return moto;
+  };
+
+  update = async (id:string, moto:Motorcycle) => {
+    const updatedMoto:Motorcycle | null = await this.model.update(id, moto);
+    return updatedMoto;
+  };
+
+  delete = async (id:string) => this.model.delete(id);
 }
