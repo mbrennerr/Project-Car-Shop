@@ -21,4 +21,6 @@ export default class CarService extends GenericService<Car> {
     const updatedCar:Car | null = await this.model.update(id, car);
     return updatedCar;
   };
+
+  delete = async (id:string) => this.model.delete(id);
 }
