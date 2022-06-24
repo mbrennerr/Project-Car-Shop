@@ -8,9 +8,6 @@ export default class Validate {
 
     if (error) {
       const [{ type: errorType, message: errorMessage }] = error.details;
-      // const {type,message} = error.details[0];
-      // const errorType = error.details[0].type;
-      // const errorMessage = error.details[0].message;
       const badRequest = { name: 'badRequest', message: errorMessage };
       const invalidInput = { name: 'invalidInput', message: errorMessage };
       console.log('validate.validation', error);
@@ -29,6 +26,17 @@ export default class Validate {
       return next();
     } catch (error) {
       console.error('Validate.Car', error);
+      next(error);
+    }
+  }
+
+  public static async Motorcycle(req:Request, res:Response, next:NextFunction) {
+    try {
+      await Validate.validation(Schemas.Moto, req.body);
+
+      return next();
+    } catch (error) {
+      console.error('Validate.Motorcycle', error);
       next(error);
     }
   }
