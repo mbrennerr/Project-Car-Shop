@@ -5,14 +5,14 @@ export default abstract class GenericModel<T> implements Model<T> {
   constructor(protected model: M<T & Document>) {}
 
   create = async (object: T): Promise<T> => {
-    const created = await this.model.create(object);
-
+    const created = await this.model.create(object);  
+    console.log('Model_GENERIC', created);
     return created;
   };
 
   read = async (): Promise<T[]> => {
-    const find = await this.model.find({});
-
+    const find = await this.model.find();
+    console.log('Mode_READ_GENERIC', find);
     return find;
   };
 
@@ -22,11 +22,11 @@ export default abstract class GenericModel<T> implements Model<T> {
     return findedOne;
   };
 
-  update = async (str: string, object: T): Promise<T | null> => {
-    const destructed = { ...object };
-    const updated = this.model.findOneAndUpdate(
-      { _id: str },
-      { destructed },
+  update = async (str: string, object:never): Promise<T | null> => {
+    // TODO:usei o 'never' no tipo do object pq a tipo T estava dando sobrecarga no update:object...pesquisar melhor depois;
+    const updated = this.model.findByIdAndUpdate(
+      str,
+      object,
       { new: true },
     );
 
