@@ -6,7 +6,7 @@ export default abstract class GenericModel<T> implements Model<T> {
 
   create = async (object: T): Promise<T> => {
     const created = await this.model.create(object);  
-    console.log('Model_GENERIC', created);
+    // console.log('Model_GENERIC', created);
     return created;
   };
 
@@ -22,15 +22,15 @@ export default abstract class GenericModel<T> implements Model<T> {
     return findedOne;
   };
 
-  update = async (str: string, object:never): Promise<T | null> => {
+  update = async (str: string, obj:never): Promise<T | null> => {
     // TODO:usei o 'never' no tipo do object pq a tipo T estava dando sobrecarga no update:object...pesquisar melhor depois;
-    const updated = this.model.findByIdAndUpdate(
-      str,
-      object,
-      { new: true },
+    
+    await this.model.updateOne(
+      { _id: str },
+      obj,
     );
 
-    return updated;
+    return this.model.findOne({ _id: str });
   };
 
   delete = async (str: string): Promise<T | null> => {
