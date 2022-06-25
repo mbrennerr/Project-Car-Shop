@@ -1,7 +1,7 @@
 import { Response, NextFunction, Request } from 'express';
 import { Car } from '../interfaces/CarInterface';
 import Controller from './genericController';
-import CarService from '../service/carService';
+import CarService from '../services/carService';
 
 export default class CarController extends Controller<Car> {
   private _route:string;
@@ -62,7 +62,7 @@ export default class CarController extends Controller<Car> {
       if (!updatedCar) {
         return res.status(404).json({ error: this.labels.NOT_FOUND });
       }
-      console.log('CONTROLLER_UPDATE', updatedCar);
+      // console.log('CONTROLLER_UPDATE', updatedCar);
       return res.status(200).json(updatedCar);
     } catch (error) {
       next(error);

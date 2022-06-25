@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Motorcycle } from '../interfaces/MotorcycleInterface';
 import Controller from './genericController';
-import MotoService from '../service/motoService';
+import MotoService from '../services/motoService';
 
 export default class MotoController extends Controller<Motorcycle> {
   private _route:string;

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import GenericService from '../service/genericService';
+import GenericService from '../services/genericService';
 
 export type ResponseError = {
   error:unknown;
