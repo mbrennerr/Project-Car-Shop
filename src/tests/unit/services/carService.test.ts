@@ -1,10 +1,10 @@
-import * as sinon from 'sinon';
+import * as Sinon from 'sinon';
 import chai from 'chai';
 import chaiHttp = require('chai-http');
 import CarModel from '../../../models/carModel';
-import CarService from '../../../service/carService';
+import CarService from '../../../services/carService';
 import {Car}  from '../../../interfaces/CarInterface';
-import Sinon = require('sinon');
+// import Sinon = require('sinon');
 
 const {expect}= chai;
 
@@ -26,37 +26,43 @@ const MocksCar = [{
   "seatsQty": 2,
 },]
 
-describe('Testing Car Service', () => {
+describe('Car Service test suite', () => {
   const model = new CarModel();
   const service = new CarService(model);
 
-  describe('Test create Car', () => {
+  describe('POST/cars - Testing the creation of a car', () => {
     before(()=>{
-      Sinon.stub(model, 'create').resolves(MocksCar[0]as Car);
+      Sinon
+      .stub(model, 'create')
+      .resolves(MocksCar[0]as Car);
     });
     after(()=>{
       (model.create as Sinon.SinonStub).restore();
     })
 
-    it('should return created car', async () => {
+    it('should return a car object ', async () => {
       const result = await service.create(MocksCar[1]);
       expect(result).to.be.equal(MocksCar[0]);
     })
   })
 
-  describe('Testing the car listing',()=>{
+  describe('GET /cars - Testing the listing of all cars',()=>{
     before(()=>{
-      Sinon.stub(model, 'read').resolves(MocksCar as Car[]);
+      Sinon
+      .stub(model, 'read')
+      .resolves(MocksCar as Car[]);
     });
-    it('should return all cars', async ()=>{
+    it('should return all cars already created', async ()=>{
       const result = await service.read();
       expect(result).to.be.equal(MocksCar);
     })
   });
 
-  describe('Testing a single car listing',()=>{
+  describe('GET/cars -Testing a single car listing',()=>{
     before(()=>{
-      Sinon.stub(model, 'readOne').resolves(MocksCar[0]as Car);
+      Sinon
+      .stub(model, 'readOne')
+      .resolves(MocksCar[0]as Car);
     })
     after(()=>{
       (model.readOne as Sinon.SinonStub).restore();
