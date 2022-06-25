@@ -10,7 +10,7 @@ export default class Validate {
       const [{ type: errorType, message: errorMessage }] = error.details;
       const badRequest = { name: 'badRequest', message: errorMessage };
       const invalidInput = { name: 'invalidInput', message: errorMessage };
-      console.log('validate.validation', error);
+      // console.log('validate.validation', error);
       if (errorType === 'any.required' || errorType === 'string.empty') {
         throw (badRequest as unknown);
       }
@@ -25,7 +25,7 @@ export default class Validate {
 
       return next();
     } catch (error) {
-      console.error('Validate.Car', error);
+      // console.error('Validate.Car', error);
       next(error);
     }
   }
@@ -36,7 +36,7 @@ export default class Validate {
 
       return next();
     } catch (error) {
-      console.error('Validate.Motorcycle', error);
+      // console.error('Validate.Motorcycle', error);
       next(error);
     }
   }

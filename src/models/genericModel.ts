@@ -12,7 +12,7 @@ export default abstract class GenericModel<T> implements Model<T> {
 
   read = async (): Promise<T[]> => {
     const find = await this.model.find();
-    console.log('Mode_READ_GENERIC', find);
+    // console.log('Mode_READ_GENERIC', find);
     return find;
   };
 
