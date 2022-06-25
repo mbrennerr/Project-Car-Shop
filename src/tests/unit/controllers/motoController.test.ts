@@ -169,9 +169,70 @@ describe ('Testing Motorcycle Controllers',() =>{
         expect(Object.keys(res.body)).to.have.lengthOf(1);
 
       })
-    })
-    describe('When object creation succeeds', () => {
-      let res:any;
+      it('should return 400 if "color" is not sent', async () => {
+        const labelErr = {"error": "\"color\" is required",}
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          buyValue: 3500,
+          category: "Street",
+          engineCapacity: 125})
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+      it('should return 400 if "buyValue" is not sent', async () => {
+        const labelErr = {"error": "\"buyValue\" is required",}
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          color: "red",
+          category: "Street",
+          engineCapacity: 125})
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+      it('should return 400 if "engineCapacity" is not sent', async () => {
+        const labelErr = {"error": "\"engineCapacity\" is required",}
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          color: "red",
+          category: "Street",
+          buyValue: 3500})
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+      it('should return 400 if "year" is not sent', async () => {
+        const labelErr = {"error": "\"year\" is required",}
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          color: "red",
+          buyValue: 3500,
+          category: "Street",
+          engineCapacity: 125})
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
       it('should return status code 201 and a Motorcycle', async () => {
         res = await chai
         .request(server.app)
@@ -190,5 +251,11 @@ describe ('Testing Motorcycle Controllers',() =>{
         expect(Object.keys(res.body)).to.have.lengthOf(7);
       })
     })
+    
+    // TODO:suite de testes das funções de atualização;
+    // describe('PUT /motorcycles', () => {
+    // let res:any;
+      
+    // })
   })
 })
