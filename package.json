@@ -8,8 +8,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest -i --forceExit --verbose",
     "test:dev": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000",
-    "test:coverage": "nyc npm run test:dev",
-    "compose:start": "docker compose down && docker compose up -d"
+    "test:coverage": "nyc npm run test:dev"
+    
     
   },
   "devDependencies": {
