@@ -1,10 +1,10 @@
-import * as sinon from 'sinon'
+import * as Sinon from 'sinon'
 import chai from 'chai';
 import chaiHttp = require('chai-http');
 import MotoModel from '../../../models/motorcyclesModel';
-import MotoService from '../../../service/motoService';
+import MotoService from '../../../services/motoService';
 import {Motorcycle} from '../../../interfaces/MotorcycleInterface';
-import Sinon = require('sinon');
+// import Sinon = require('sinon');
 const {expect} =chai;
 const MocksMoto = [{
   _id: "62b24693300466f3f6eceed6",
