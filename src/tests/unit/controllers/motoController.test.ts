@@ -96,7 +96,7 @@ describe ('Testing Motorcycle Controllers',() =>{
   })
 
   describe('POST/motorcycles', () => {
-    describe('When oject criation fails', () => {
+    describe('When object criation fails', () => {
       let res:any;
       const labelErr ={
         "error": "\"model\" is required",
@@ -107,6 +107,67 @@ describe ('Testing Motorcycle Controllers',() =>{
         .request(server.app)
         .post('/motorcycles')
         .send({})
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+
+      it('should return 400 if "engineCapacity" is less than 1', async () => {
+        const labelErr={
+          "error": "\"engineCapacity\" must be greater than or equal to 1",
+        }
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          color: "red",
+          buyValue: 3500,
+          category: "Street",
+          engineCapacity: 0
+        })
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+      it('should return 400 if "engineCapacity" is greater than 2500', async () => {
+        const labelErr={
+          "error": "\"engineCapacity\" must be less than or equal to 2500",
+        }
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          color: "red",
+          buyValue: 3500,
+          category: "Street",
+          engineCapacity: 3000
+        })
+        .then((res) => res);
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.deep.equal(labelErr);
+        expect(Object.keys(res.body)).to.have.lengthOf(1);
+      })
+      it('should return 400 if "engineCapacity" is not a number', async () => {
+        const labelErr={
+          "error": "\"engineCapacity\" must be a number"
+        }
+        res = await chai
+        .request(server.app)
+        .post('/motorcycles')
+        .send({
+          model: "Honda CG Titan 125",
+          year: 1963,
+          color: "red",
+          buyValue: 3500,
+          category: "Street",
+          engineCapacity: "nam"
+        })
         .then((res) => res);
         expect(res.status).to.equal(400);
         expect(res.body).to.be.deep.equal(labelErr);
