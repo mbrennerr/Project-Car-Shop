@@ -315,11 +315,66 @@ describe('Car Controller test suite', () => {
   
       })
       // TODO:suite de teste das funções de atualização;
-      // describe('PUT /cars', () => {
-      //   let res:any
-  
-        
-      // })
+       
+  })
+
+  describe('PUT /cars/:id', () => {
+    let res:any
+    let mock:any
+    before(async () => {
+      sinon
+      .stub(service, 'update')
+      .resolves(mockCar[0])
+      res = await chai
+      .request(server.app)
+      .post('/cars')
+      .send(mockCar[1])
+       const request = await chai
+       .request(server.app)
+       .get('/cars')
+        mock= request.body
+    })
+    after(() => {
+      sinon.restore();
+    })
+    it('should update a car', async () => {
+      res = await chai
+      .request(server.app)
+      .put(`/cars/${mock[0]._id}`)
+      .send(mockCar[1])
+      expect(res.status).to.be.equal(200);
+      expect(Object.keys(res.body)).to.have.lengthOf(7);
+    })
+  })
+  describe('DELETE /cars/:id', () => {
+    let res:any
+    let mock:any
+    before(async () => {
+      sinon
+      .stub(service, 'delete')
+      .resolves(mockCar[0])
+      res = await chai
+      .request(server.app)
+      .post('/cars')
+      .send(mockCar[1])
+       const request = await chai
+       .request(server.app)
+       .get('/cars')
+        mock= request.body
+    })
+    after(() => {
+      sinon.restore();
+    })
+    it('should delete a car', async () => {
+      res = await chai
+      .request(server.app)
+      .delete(`/cars/${mock[0]._id}`)
+      const cars = await service.readOne(mock[0]._id)
+      expect(cars).to.be.null;
+
+      
+    })
+
   })
   
 })
