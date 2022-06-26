@@ -148,26 +148,13 @@ describe('Car Controller test suite', () => {
           const labelErr = {"error": "\"doorsQty\" must be greater than or equal to 2",}
           res = await chai.request(server.app)
           .post('/cars')
-          .send({"model": "Ferrari Maranello",
+          .send({
+          "model": "Ferrari Maranello",
           "year": 1963,
           "color": "red",
           "buyValue": 3500000,
           "seatsQty": 2,
           "doorsQty": 1})
-          .then((res)=> res);
-          expect(res.status).to.be.equal(400);
-          expect(res.body).to.be.deep.equal(labelErr);
-          expect(Object.keys(res.body)).to.have.lengthOf(1);
-        })
-        it('should return 400 if model is not present',async() => {
-          const labelErr = {"error": "\"model\" is required",}
-          res = await chai.request(server.app)
-          .post('/cars')
-          .send({"year": 1963,
-          "color": "red",
-          "buyValue": 3500000,
-          "seatsQty": 2,
-          "doorsQty": 2})
           .then((res)=> res);
           expect(res.status).to.be.equal(400);
           expect(res.body).to.be.deep.equal(labelErr);
@@ -188,6 +175,37 @@ describe('Car Controller test suite', () => {
           expect(res.body).to.be.deep.equal(labelErr);
           expect(Object.keys(res.body)).to.have.lengthOf(1);
         })
+        it('should return 400 if the amount of "year" is greater than 2022',async() => {
+          const labelErr = {"error": "\"year\" must be less than or equal to 2022",}
+          res = await chai.request(server.app)
+          .post('/cars')
+          .send({"model": "Ferrari Maranello",
+          "year": 2023,
+          "color": "red",
+          "buyValue": 3500000,
+          "seatsQty": 2,
+          "doorsQty": 1})
+          .then((res)=> res);
+          expect(res.status).to.be.equal(400);
+          expect(res.body).to.be.deep.equal(labelErr);
+          expect(Object.keys(res.body)).to.have.lengthOf(1);
+        })
+        it('should return 400 if model is not present',async() => {
+          const labelErr = {"error": "\"model\" is required",}
+          res = await chai.request(server.app)
+          .post('/cars')
+          .send({
+          "year": 1963,
+          "color": "red",
+          "buyValue": 3500000,
+          "seatsQty": 2,
+          "doorsQty": 2})
+          .then((res)=> res);
+          expect(res.status).to.be.equal(400);
+          expect(res.body).to.be.deep.equal(labelErr);
+          expect(Object.keys(res.body)).to.have.lengthOf(1);
+        })
+        
         it('should return 400 if year is not present',async() => {
           const labelErr = {"error": "\"year\" is required",}
           res = await chai.request(server.app)
