@@ -25,7 +25,8 @@ export default class Schemas {
       status: Joi.boolean(),
       buyValue: Joi.number().integer().required(),
       category: Joi.string().valid('Street', 'Custom', 'Trail').required(),
-      engineCapacity: Joi.number().min(1).max(2500).required(),
+      engineCapacity: Joi.number().min(1).max(2500)
+        .required(),
     });
   }
 }

@@ -28,7 +28,7 @@ export default class App {
   // public addmiddleware(middlewares) {
   //   this.app.use(middlewares);
   // }
-  // como tipar o middleare de error pra ficar dinamico;
+  // TODO: pesquisar como tipar o middleware de error pra ficar dinâmico;
 
   public addmiddleware() {
     this.app.use(this.middleware);

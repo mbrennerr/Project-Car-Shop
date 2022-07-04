@@ -23,7 +23,7 @@ export default abstract class GenericController<T> {
   protected Service:GenericService<T>;
 
   // constructor(protected Service:GenericService<T>){}
-  constructor(serviço:GenericService<T>) {
+  protected constructor(serviço:GenericService<T>) {
     this.Service = serviço;
   }
 

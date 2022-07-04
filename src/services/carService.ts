@@ -19,7 +19,7 @@ export default class CarService extends GenericService<Car> {
 
   update = async (id:string, car:Car) => {
     const updatedCar:Car | null = await this.model.update(id, car);
-    console.log('updatedCar', updatedCar);
+    // console.log('updatedCar', updatedCar);
     return updatedCar;
   };
 
